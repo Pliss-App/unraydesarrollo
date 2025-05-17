@@ -30,6 +30,7 @@ var corsOptions = {
   'http://localhost:3000',       // desarrollo local
   'http://127.0.0.1:3000',
   'https://unrayappserver.onrender.com',
+  'https://unraydesarrollo.onrender.com',
   'http://localhost:8080',
   'http://localhost:8100',
   'https://unraylatinoamerica.com'        // tu dominio en producción
@@ -63,7 +64,7 @@ app.get('/api/conection', (req, res) => {
 
 //module.exports = { io };
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const ser = server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
