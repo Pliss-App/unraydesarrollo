@@ -41,6 +41,69 @@ ORDER BY  fecha asc`,
 
 
 
+const getListAprobado = () => {
+    return new Promise((resolve, reject) => {
+        connection.query(`
+select u.id, s.id idservicio, u.codigo, u.nombre, u.apellido, ro.nombre rol,  s.nombre servicio, d.estado, d.fecha from documentacion d
+INNER JOIN usuario u
+on d.iduser= u.id
+INNER JOIN usuario_rol ur
+on u.id = ur.iduser
+INNER JOIN servicios s
+on ur.idservice = s.id
+INNER JOIN roles ro
+on ur. idrol = ro.id
+WHERE d.estado = 'Aprobado'
+ORDER BY  fecha asc`,
+            (err, result) => {
+                if (err) reject(err)
+                resolve(result)
+            })
+    });
+}
+
+const getListRechazadas = () => {
+    return new Promise((resolve, reject) => {
+        connection.query(`
+select u.id, s.id idservicio, u.codigo, u.nombre, u.apellido, ro.nombre rol,  s.nombre servicio, d.estado, d.fecha from documentacion d
+INNER JOIN usuario u
+on d.iduser= u.id
+INNER JOIN usuario_rol ur
+on u.id = ur.iduser
+INNER JOIN servicios s
+on ur.idservice = s.id
+INNER JOIN roles ro
+on ur. idrol = ro.id
+WHERE d.estado = 'Rechazada'
+ORDER BY  fecha asc`,
+            (err, result) => {
+                if (err) reject(err)
+                resolve(result)
+            })
+    });
+}
+
+const getListPendientes = () => {
+    return new Promise((resolve, reject) => {
+        connection.query(`
+select u.id, s.id idservicio, u.codigo, u.nombre, u.apellido, ro.nombre rol,  s.nombre servicio, d.estado, d.fecha from documentacion d
+INNER JOIN usuario u
+on d.iduser= u.id
+INNER JOIN usuario_rol ur
+on u.id = ur.iduser
+INNER JOIN servicios s
+on ur.idservice = s.id
+INNER JOIN roles ro
+on ur. idrol = ro.id
+WHERE d.estado = 'Pendiente'
+ORDER BY  fecha asc`,
+            (err, result) => {
+                if (err) reject(err)
+                resolve(result)
+            })
+    });
+}
+
 const getTodas = (item) => {
     return new Promise((resolve, reject) => {
         connection.query(`select u.nombre, u.apellido, u.estado, u.estado_usuario, b.saldo, d.* from documentacion d
@@ -144,5 +207,8 @@ module.exports = {
     actualizarEstadoDocumentacion,
     getListEnviado,
     getDatosVehiculoId,
-    actualizarFotoDocumento
+    actualizarFotoDocumento,
+    getListAprobado,
+    getListRechazadas,
+    getListPendientes 
 }

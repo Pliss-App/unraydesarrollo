@@ -26,7 +26,69 @@ isRouter.get('/afiliaciones-enviadas', async (req, res) => {
 
 })
 
+isRouter.get('/afiliaciones-aprobadas', async (req, res) => {
+    try {
+        const result = await isController.getListAprobado();
+        if (result === undefined) {
+            return res.status(200).send({
+                success: false,
+                msg: 'No se encontro data',
+            });
+        } else {
+            return res.status(200).send({
+                success: true,
+                msg: 'SUCCESSFULLY',
+                result: result
+            });
+        }
 
+    } catch (error) {
+        console.error(error)
+    }
+
+})
+
+isRouter.get('/afiliaciones-rechazadas', async (req, res) => {
+    try {
+        const result = await isController.getListRechazadas();
+        if (result === undefined) {
+            return res.status(200).send({
+                success: false,
+                msg: 'No se encontro data',
+            });
+        } else {
+            return res.status(200).send({
+                success: true,
+                msg: 'SUCCESSFULLY',
+                result: result
+            });
+        }
+
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+isRouter.get('/afiliaciones-pendientes', async (req, res) => {
+    try {
+        const result = await isController.getListPendientes;
+        if (result === undefined) {
+            return res.status(200).send({
+                success: false,
+                msg: 'No se encontro data',
+            });
+        } else {
+            return res.status(200).send({
+                success: true,
+                msg: 'SUCCESSFULLY',
+                result: result
+            });
+        }
+
+    } catch (error) {
+        console.error(error)
+    }
+})
 
 isRouter.get('/detalle-vehiculos/:id', async (req, res) => {
     try {
