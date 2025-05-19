@@ -72,6 +72,16 @@ WHERE  d.iduser = ?`, [id],
     });
 }
 
+const getDatosVehiculoId = (id) => {
+    return new Promise((resolve, reject) => {
+        connection.query(`select * from detalle_vehiculo where idUser = ?`, [id],
+            (err, result) => {
+                if (err) reject(err)
+                resolve(result)
+            })
+    });
+}
+
 const deleteViaje = (id) => {
     return new Promise((resolve, reject) => {
         connection.query(`delete from solicitudes WHERE id= ?`, [id],
@@ -121,5 +131,6 @@ module.exports = {
     getDocumentoId,
     activarConductor,
     actualizarEstadoDocumentacion,
-    getListEnviado 
+    getListEnviado ,
+    getDatosVehiculoId
 }
