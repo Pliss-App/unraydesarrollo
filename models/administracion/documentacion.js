@@ -123,6 +123,17 @@ const actualizarEstadoDocumentacion = (id, estado) => {
     });
 }
 
+const actualizarFotoDocumento = (key, foto, id, iduser) => {
+    return new Promise((resolve, reject) => {
+        connection.query(`update documentacion set ${key}= ? WHERE id= ? and iduser= ?`, [foto, id, iduser],
+            (err, result) => {
+                if (err) reject(err)
+                resolve(result)
+            })
+    });
+}
+
+
 module.exports = {
     getActivos,
     getTodas,
@@ -131,6 +142,7 @@ module.exports = {
     getDocumentoId,
     activarConductor,
     actualizarEstadoDocumentacion,
-    getListEnviado ,
-    getDatosVehiculoId
+    getListEnviado,
+    getDatosVehiculoId,
+    actualizarFotoDocumento
 }
